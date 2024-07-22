@@ -1,0 +1,22 @@
+{
+  "name": "GeniDev",
+  "version": "0.1.0",
+  "description": "Geni Dev CLI tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prakis/geni-dev.git"
+  },
+  "author": "Kishore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prakis/geni-dev/issues"
+  },
+  "homepage": "https://geni.dev",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

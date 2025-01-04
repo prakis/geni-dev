@@ -16,9 +16,9 @@ async function main(){
   const addMakeItSmaller = "Give give me only the commands, don't explain. " + commandArgsAsString
   //const addMakeItSmaller = "Give me only commands, dont want explaination.";
 
-  console.log('Question:', commandArgsAsString);
+  //console.log('Question:', commandArgsAsString);
   var answer = await gemini.askGemini(addMakeItSmaller);
-  console.log("Answer:", answer);
+  console.log(answer);
 }  
 
 main();

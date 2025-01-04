@@ -1,6 +1,6 @@
 {
   "name": "geni-dev",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Geni Dev CLI tools",
   "main": "geni.js",
   "bin":{

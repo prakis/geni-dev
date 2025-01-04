@@ -1,8 +1,9 @@
 {
-  "name": "GeniDev",
+  "name": "geni-dev",
   "version": "0.1.0",
   "description": "Geni Dev CLI tools",
   "main": "index.js",
+  "typeaa": "module",
   "scripts": {
     "test": "test"
   },
@@ -17,6 +18,7 @@
   },
   "homepage": "https://geni.dev",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "axios": "^0.19.2"
   }
 }

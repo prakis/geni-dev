@@ -14,8 +14,10 @@ async function main(){
   const EMPTY_SPACE = ' ';
   const commandArgsAsString = commandArgsArray.join(EMPTY_SPACE);
   const addMakeItSmaller = "Give give me only the commands, don't explain. " + commandArgsAsString
+  //const addMakeItSmaller = "Give me only commands, dont want explaination.";
+
   console.log('Question:', commandArgsAsString);
-  var answer = await gemini.askGemini(commandArgsAsString);
+  var answer = await gemini.askGemini(addMakeItSmaller);
   console.log("Answer:", answer);
 }  
 

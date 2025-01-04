@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 const gemini  = require('./gemini.js');
 

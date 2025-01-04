@@ -1,11 +1,10 @@
 {
   "name": "geni-dev",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Geni Dev CLI tools",
   "main": "geni.js",
-  "typeaa": "module",
   "bin":{
-    "geni": "geni.js"
+    "geni": "./geni.js"
   },
   "scripts": {
     "test": "test"

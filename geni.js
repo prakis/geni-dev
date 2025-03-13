@@ -3,7 +3,7 @@
 const gemini  = require('./gemini.js');
 
 function geniDev() {
-    return "hello NPM"
+    return "Hi!"
   }
   
 async function main(){

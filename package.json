@@ -1,6 +1,6 @@
 {
   "name": "geni-dev",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Geni: AI in your Terminal",
   "main": "geni.js",
   "bin": {
@@ -24,5 +24,22 @@
   },
   "devDependencies": {
     "jest": "^30.0.0"
-  }
+  },
+  "keywords": [
+    "geni",
+    "ai",
+    "gemini",
+    "cli",
+    "command-line",
+    "terminal",
+    "google",
+    "gemini-api",
+    "developer-tools",
+    "shell",
+    "assistant",
+    "productivity",
+    "question-answering",
+    "generative-ai",
+    "geni-dev"
+  ]
 }

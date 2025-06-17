@@ -3,6 +3,7 @@ const https = require("https");
 const http = require("http");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { GEMINI_API_KEY } = process.env;
+const packageJson = require('./package.json');
 
 const PROMPT_TEMPLATE = (question) =>
   `Respond with only the terminal command(s) needed. No explanation.\nQuestion: ${question}`;
@@ -71,6 +72,7 @@ async function askGemini(question) {
 async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0) {
+    console.log(`Version: ${packageJson.version}\n`);
     console.error("Usage: geni <your question here>");
     process.exit(1);
   }

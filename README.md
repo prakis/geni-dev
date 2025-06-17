@@ -1,18 +1,55 @@
-# geni
+# Geni CLI
 
-## To install (use -g option)
+**[Geni](https://geni.dev)** is a simple AI-powered command-line tool that lets you ask technical questions and get instant terminal commands — right from your terminal.
 
-```
-npm -g install geni-dev
-```
-
-## Get free Gemini API Key.
-
-1. Create a free [Google Gemini API key.](https://ai.google.dev/gemini-api/docs/api-key)
-2. And set the ['GEMINI_API_KEY' as environment. variable.](https://ai.google.dev/gemini-api/docs/api-key)
+It responds with only the commands you need — no explanations, no clutter.
 
 
-## How-to-use
-Open a command prompt and type your questions.
+## ✨ Features
 
-```c:\>geni how to create a git branch```
+- Answers developer questions from terminal.
+- Uses your own GEMINI_API_KEY if available.
+- Falls back to [api.geni.dev](https://api.geni.dev) if no API key is set.
+- Simple output with no description.
+
+
+
+## 📦 Installation
+
+## ```npm install -g geni-dev```
+
+
+##  Usage
+Just type your question in the terminal:
+
+```geni how to undo last git commit```
+
+It will print only the terminal command(s) you need.
+
+---
+
+
+## 🔐 Want to use your own Gemini API KEY (optional)
+To get faster and unlimited answers, you can use the Google Gemini API (free).
+
+1. Get your Gemini API Key:
+ - Visit: https://ai.google.dev/gemini-api/docs/api-key
+ - Copy your GEMINI_API_KEY 
+
+2. Set the GEMINI_API_KEY environment variable:
+ [How to set GEMINI_API_KEY' as environment variable.](https://ai.google.dev/gemini-api/docs/)
+
+### Linux / macOS:
+
+#### Add this line to your .bashrc, .zshrc, or .bash_profile:
+``` export GEMINI_API_KEY=your-api-key-here ```
+Then run:
+```source ~/.bashrc   # or ~/.zshrc depending on your shell```
+
+### Windows (persistent):
+
+- Search for “Environment Variables” in Windows.
+- Under System Variables or User Variables, click New.
+- Add: Variable name: GEMINI_API_KEY value: your API key
+
+

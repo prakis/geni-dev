@@ -1,6 +1,8 @@
-const readline = require("readline");
+#!/usr/bin/env node
+
+//const readline = require("readline");
 const https = require("https");
-const http = require("http");
+//const http = require("http");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { GEMINI_API_KEY } = process.env;
 const packageJson = require('./package.json');

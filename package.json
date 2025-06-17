@@ -3,24 +3,26 @@
   "version": "0.1.4",
   "description": "Geni Dev CLI tools",
   "main": "geni.js",
-  "bin":{
+  "bin": {
     "geni": "./geni.js"
   },
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prakis/geni-dev.git"
   },
   "author": "Kishore",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/prakis/geni-dev/issues"
   },
   "homepage": "https://geni.dev",
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "axios": "^0.19.2"
+    "@google/generative-ai": "^0.21.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.0"
   }
 }

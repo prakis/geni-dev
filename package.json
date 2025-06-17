@@ -1,7 +1,7 @@
 {
   "name": "geni-dev",
-  "version": "0.1.4",
-  "description": "Geni Dev CLI tools",
+  "version": "1.0.1",
+  "description": "Geni: AI in your Terminal",
   "main": "geni.js",
   "bin": {
     "geni": "./geni.js"

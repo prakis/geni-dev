@@ -1,6 +1,6 @@
 {
   "name": "geni-dev",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Geni: AI in your Terminal",
   "main": "geni.js",
   "bin": {

@@ -15,7 +15,8 @@ function stripCodeFences(text) {
 }
 
 function askGeniDev(question) {
-    console.log('Question:', question);
+    //console.log('Question:', question);
+    //console.log("\n");
     if(!question || question.length > 500 || question.length < 2){
         return "Please provide a short question, 500 characters.";
     }

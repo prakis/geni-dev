@@ -4,7 +4,7 @@
 const https = require("https");
 //const http = require("http");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { GEMINI_API_KEY } = process.env;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const packageJson = require('./package.json');
 
 const PROMPT_TEMPLATE = (question) =>

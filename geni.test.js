@@ -1,6 +1,6 @@
-const { stripCodeFences, promptTemplate } = require('./geni');
+const { processQuestion, askGemini, stripCodeFences } = require('./geni');
 
-describe('stripCodeFences', () => {
+describe('geni-tests', () => {
   test('removes triple backticks', () => {
     const input = '```bash\ngit status\n```';
     const expected = 'bash\ngit status';
@@ -10,6 +10,16 @@ describe('stripCodeFences', () => {
   test('works with no backticks', () => {
     expect(stripCodeFences('git status')).toBe('git status');
   });
+
+  // write unittest for processQuestion function
+  test('processQuestion formats question correctly', async () => {
+    const args = ['"how to delete a git branch?"'];
+    const expected = 'git branch -d <branch_name>';
+    // Mock askGemini to return the processed question for testing
+    const mockanswer = await processQuestion(args);
+    console.log('Mock answer:', mockanswer);
+    expect(mockanswer).toContain(expected);
+
 });
 
 /*describe('promptTemplate', () => {
@@ -20,3 +30,5 @@ describe('stripCodeFences', () => {
     expect(result).toContain(q);
   });
 });*/
+
+});

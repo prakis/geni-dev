@@ -14,6 +14,9 @@ function stripCodeFences(text) {
   return text.replace(/```/g, "").trim();
 }
 
+/*
+// backend api key functionality is removed, only Gemini API is supported now. This is the old function that called the geni.dev API. 
+
 function askGeniDev(question) {
     //console.log('Question:', question);
     //console.log("\n");
@@ -49,7 +52,7 @@ function askGeniDev(question) {
     req.write(data);
     req.end();
   });
-}
+}*/
 
 async function askGemini(question) {
     try{
@@ -80,6 +83,11 @@ async function main() {
     process.exit(1);
   }
 
+  processQuestion(args);
+}
+
+async function processQuestion(args) {
+  let answer = "";
   let question = args.join(" ").trim();
   if (
     (question.startsWith("\"") && question.endsWith("\"")) ||
@@ -88,15 +96,23 @@ async function main() {
     question = question.slice(1, -1);
   }
 
+  console.log('Processing Question:-->', question);
+
   try {
-    const answer = GEMINI_API_KEY
-      ? await askGemini(question)
-      : await askGeniDev(question);
-    console.log(answer);
+
+      if(!GEMINI_API_KEY){
+        console.error("Error: GEMINI_API_KEY environment variable not set.");
+        process.exit(1);
+      }
+      answer = await askGemini(question);
+    
+      console.log(answer);
+
   } catch (e) {
     console.error("Error:", e);
     process.exit(1);
   }
+  return answer;
 }
 
 if (require.main === module) {
@@ -105,7 +121,7 @@ if (require.main === module) {
 
 // Optional: Export for unit testing
 module.exports = {
+  processQuestion,
   askGemini,
-  askGeniDev,
   stripCodeFences,
 };

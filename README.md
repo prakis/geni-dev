@@ -5,7 +5,7 @@
 It responds with only the commands you need — no explanations, no clutter.
 
 
-## ✨ Features
+## Features
 
 - Answers developer questions from terminal.
 - Uses your own GEMINI_API_KEY if available.
@@ -14,7 +14,7 @@ It responds with only the commands you need — no explanations, no clutter.
 
 
 
-## 📦 Installation
+## Installation
 
 ## ```npm install -g geni-dev```
 

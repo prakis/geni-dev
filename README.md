@@ -5,16 +5,16 @@
 It responds with only the commands you need — no explanations, no clutter.
 
 
-## ✨ Features
+## Features
 
 - Answers developer questions from terminal.
 - Uses your own GEMINI_API_KEY if available.
-- Falls back to [api.geni.dev](https://api.geni.dev) if no API key is set.
+- ~~Falls back to [api.geni.dev](https://api.geni.dev) if no API key is set.~~ Fallback api is deprectated.
 - Simple output with no description.
 
 
 
-## 📦 Installation
+## Installation
 
 ## ```npm install -g geni-dev```
 
@@ -29,8 +29,8 @@ It will print only the terminal command(s) you need.
 ---
 
 
-## 🔐 Want to use your own Gemini API KEY (optional)
-To get faster and unlimited answers, you can use the Google Gemini API (free).
+## Set your own Gemini API KEY 
+Create and Connect your personal Google Gemini API key(free). 
 
 1. Get your Gemini API Key:
  - Visit: https://ai.google.dev/gemini-api/docs/api-key

@@ -9,7 +9,7 @@ It responds with only the commands you need — no explanations, no clutter.
 
 - Answers developer questions from terminal.
 - Uses your own GEMINI_API_KEY if available.
-- Falls back to [api.geni.dev](https://api.geni.dev) if no API key is set.
+- ~~Falls back to [api.geni.dev](https://api.geni.dev) if no API key is set.~~ Fallback api is deprectated.
 - Simple output with no description.
 
 

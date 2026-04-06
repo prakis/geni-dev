@@ -7,8 +7,26 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const packageJson = require('./package.json');
 
-const PROMPT_TEMPLATE = (question) =>
-  `Respond with only the terminal command(s) needed. No explanation.\nQuestion: ${question}`;
+/*const PROMPT_TEMPLATE_old = (question) =>
+  `Respond with only the terminal command(s) needed. No explanation.\nQuestion: ${question}`;*/
+
+const PROMPT_TEMPLATE = (question) => `
+You are a CLI assistant. Output ONLY terminal commands.
+Use # comments (max 5 words) when multiple options exist.
+No prose, no markdown backticks, no explanations.
+
+Examples:
+User: how to undo last git commit?
+Response:
+git reset --soft HEAD~1     # keeps changes staged
+# git reset --hard HEAD~1   # discards changes
+
+User: find a file named config
+Response: find . -name "config"
+
+User: ${question}
+Response:`;
+
 
 function stripCodeFences(text) {
   return text.replace(/```/g, "").trim();
@@ -95,8 +113,6 @@ async function processQuestion(args) {
   ) {
     question = question.slice(1, -1);
   }
-
-  console.log('Processing Question:-->', question);
 
   try {
 

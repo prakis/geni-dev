@@ -29,8 +29,8 @@ It will print only the terminal command(s) you need.
 ---
 
 
-## 🔐 Want to use your own Gemini API KEY (optional)
-To get faster and unlimited answers, you can use the Google Gemini API (free).
+## Set your own Gemini API KEY 
+Create and Connect your personal Google Gemini API key(free). 
 
 1. Get your Gemini API Key:
  - Visit: https://ai.google.dev/gemini-api/docs/api-key

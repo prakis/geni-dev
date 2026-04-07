@@ -76,6 +76,8 @@ async function askGemini(question) {
     try{
         const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+        // gemin-2.5-pro is a better model but often getting high demand error, so switching back to flash-lite
+        //const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
         const result = await model.generateContent({
         contents: [
             {
@@ -88,6 +90,18 @@ async function askGemini(question) {
         const text = await result.response.text();
         return stripCodeFences(text);
     } catch (error) {
+        // 1. Check for specific HTTP Status Codes
+      if (error.status === 429) {
+        throw new Error("QUOTA EXCEEDED: You've hit your Gemini API limit. Please wait a minute or check your billing at ai.google.dev.");
+      } 
+      
+      if (error.status === 403 || error.status === 401) {
+        throw new Error("INVALID API KEY: Your GEMINI_API_KEY is incorrect or doesn't have permission to use this model.");
+      }
+
+      if (error.status === 404) {
+        throw new Error("MODEL NOT FOUND: The model name you are using might be deprecated or typoed.");
+      }
         console.error("Error in Gemini API call failed:", error);
         throw new Error("Failed to get response from Gemini API");
     }

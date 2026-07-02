@@ -1,6 +1,6 @@
 {
   "name": "geni-dev",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Geni: AI in your Terminal",
   "main": "geni.js",
   "bin": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://geni.dev",
   "dependencies": {
-    "@google/generative-ai": "^0.21.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@google/generative-ai": "^0.21.0",
+    "openai": "^4.104.0"
   },
   "devDependencies": {
     "jest": "^30.0.0"

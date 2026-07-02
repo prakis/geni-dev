@@ -3,9 +3,12 @@
 //const readline = require("readline");
 const https = require("https");
 //const http = require("http");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const packageJson = require('./package.json');
+const packageJson = require("./package.json");
+const { askGemini } = require("./providers/gemini");
+const { askOpenAI } = require("./providers/openai");
+const { askAnthropic } = require("./providers/anthropic");
+
+const DEFAULT_AI_MODEL = "gemini:gemini-2.5-flash-lite-test";
 
 /*const PROMPT_TEMPLATE_old = (question) =>
   `Respond with only the terminal command(s) needed. No explanation.\nQuestion: ${question}`;*/
@@ -27,9 +30,53 @@ Response: find . -name "config"
 User: ${question}
 Response:`;
 
-
 function stripCodeFences(text) {
   return text.replace(/```/g, "").trim();
+}
+
+function parseAiModel() {
+  const raw = process.env.GENI_AI_MODEL || DEFAULT_AI_MODEL;
+  const colonIndex = raw.indexOf(":");
+
+  if (colonIndex === -1) {
+    throw new Error(
+      'Invalid GENI_AI_MODEL format. Expected provider:model (e.g. gemini:gemini-1.5-flash).'
+    );
+  }
+
+  const provider = raw.slice(0, colonIndex).trim().toLowerCase();
+  const model = raw.slice(colonIndex + 1).trim();
+
+  if (!provider || !model) {
+    throw new Error(
+      'Invalid GENI_AI_MODEL format. Expected provider:model (e.g. openai:gpt-4o).'
+    );
+  }
+
+  return { provider, model };
+}
+
+async function askAI(question) {
+  const { provider, model } = parseAiModel();
+
+  let answer;
+  switch (provider) {
+    case "gemini":
+      answer = await askGemini(question, model, PROMPT_TEMPLATE);
+      break;
+    case "openai":
+      answer = await askOpenAI(question, model, PROMPT_TEMPLATE);
+      break;
+    case "anthropic":
+      answer = await askAnthropic(question, model, PROMPT_TEMPLATE);
+      break;
+    default:
+      throw new Error(
+        `Unsupported AI provider "${provider}". Supported providers: gemini, openai, anthropic.`
+      );
+  }
+
+  return stripCodeFences(answer);
 }
 
 /*
@@ -72,41 +119,6 @@ function askGeniDev(question) {
   });
 }*/
 
-async function askGemini(question) {
-    try{
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
-        // gemin-2.5-pro is a better model but often getting high demand error, so switching back to flash-lite
-        //const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
-        const result = await model.generateContent({
-        contents: [
-            {
-            role: "user",
-            parts: [{ text: PROMPT_TEMPLATE(question) }],
-            },
-        ],
-        });
-
-        const text = await result.response.text();
-        return stripCodeFences(text);
-    } catch (error) {
-        // 1. Check for specific HTTP Status Codes
-      if (error.status === 429) {
-        throw new Error("QUOTA EXCEEDED: You've hit your Gemini API limit. Please wait a minute or check your billing at ai.google.dev.");
-      } 
-      
-      if (error.status === 403 || error.status === 401) {
-        throw new Error("INVALID API KEY: Your GEMINI_API_KEY is incorrect or doesn't have permission to use this model.");
-      }
-
-      if (error.status === 404) {
-        throw new Error("MODEL NOT FOUND: The model name you are using might be deprecated or typoed.");
-      }
-        console.error("Error in Gemini API call failed:", error);
-        throw new Error("Failed to get response from Gemini API");
-    }
-}
-
 async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0) {
@@ -122,24 +134,17 @@ async function processQuestion(args) {
   let answer = "";
   let question = args.join(" ").trim();
   if (
-    (question.startsWith("\"") && question.endsWith("\"")) ||
+    (question.startsWith('"') && question.endsWith('"')) ||
     (question.startsWith("'") && question.endsWith("'"))
   ) {
     question = question.slice(1, -1);
   }
 
   try {
-
-      if(!GEMINI_API_KEY){
-        console.error("Error: GEMINI_API_KEY environment variable not set.");
-        process.exit(1);
-      }
-      answer = await askGemini(question);
-    
-      console.log(answer);
-
+    answer = await askAI(question);
+    console.log(answer);
   } catch (e) {
-    console.error("Error:", e);
+    console.error("Error:", e.message || e);
     process.exit(1);
   }
   return answer;
@@ -152,6 +157,10 @@ if (require.main === module) {
 // Optional: Export for unit testing
 module.exports = {
   processQuestion,
+  askAI,
   askGemini,
+  parseAiModel,
   stripCodeFences,
+  PROMPT_TEMPLATE,
+  DEFAULT_AI_MODEL,
 };
